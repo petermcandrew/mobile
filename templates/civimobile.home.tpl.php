@@ -20,11 +20,22 @@
 		?>
 		</ul>
 		<div data-role="fieldcontain">
-		    <input type="search" name="password" id="search" value="" />
+		    <input type="search" name="search" placeholder="Search for contacts" id="search" value="" />
 		</div>
 		
 </div><!-- /page -->
 <?php require('civimobile.navbar.php'); ?>
 
+<script>
+$( function(){
+	$('#search').change(function() {
+	  contactSearch($(this).val());
+	});
 
+function contactSearch(name){
+<?php echo $name; ?>
+}
+});
+
+</script>
 <?php require('civimobile.footer.php'); ?>
