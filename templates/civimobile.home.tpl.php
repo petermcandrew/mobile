@@ -27,15 +27,24 @@
 <?php require('civimobile.navbar.php'); ?>
 
 <script>
-$( function(){
-	$('#search').change(function() {
-	  contactSearch($(this).val());
-	});
 
-function contactSearch(name){
-<?php echo $name; ?>
-}
+$( function(){
+	$('#search').change (function () {
+		value = $("#search").val();		
+    contactSearch(value);
+	});
 });
+function contactSearch(q){
+	alert(q);
+}
 
 </script>
 <?php require('civimobile.footer.php'); ?>
+
+
+
+$().crmAPI ('Contact','get',{'version' :'3'}}
+  ,{ success:function (data){    
+      $.each(data, function(key, value) {// do something });
+    }
+});
