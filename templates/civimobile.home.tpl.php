@@ -29,22 +29,39 @@
 <script>
 
 $( function(){
+
 	$('#search').change (function () {
 		value = $("#search").val();		
     contactSearch(value);
 	});
 });
-function contactSearch(q){
-	alert(q);
+function contactSearch (q){
+    $.mobile.showPageLoadingMsg( 'Searching' );
+    $().crmAPI ('Contact','get',{'version' :'3', 'sort_name': q, 'return' : 'display_name,phone' }
+          ,{ 
+            ajaxURL: crmajaxURL,
+            success:function (data){
+			console.log(data.values);
+              if (data.count == 0) {
+				alert("no results");                            
+              }
+              else {
+          alert("some results");
+			// $.each(data, function(index, value) {
+			// 		            $('#months').append('<li>' + value + '</li>');
+			// 		        });
+			//               }
+           $.mobile.hidePageLoadingMsg( );
+
+          }
+   });
 }
+// $.each(data.values, function(key, value) {
+//     $('#contacts').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="event-'+value.contact_id+'" ><a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a></li>');
+//   });
+// $.mobile.hidePageLoadingMsg( );
+// $('#contacts').listview(cmd);
+// }
 
 </script>
 <?php require('civimobile.footer.php'); ?>
-
-
-
-$().crmAPI ('Contact','get',{'version' :'3'}}
-  ,{ success:function (data){    
-      $.each(data, function(key, value) {// do something });
-    }
-});

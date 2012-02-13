@@ -1,7 +1,3 @@
-function createPage
-
-
-
 // 
 //         // generate list of events
 //         $().crmAPI ('Event','get',{'version' :'3' }
