@@ -20,6 +20,13 @@ function civimobile_menu() {
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );
+	$items['civimobile/contact/%'] = array(
+      'title'            => 'Contact',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('contact',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
   
   return $items;
 }
