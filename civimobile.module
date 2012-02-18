@@ -27,6 +27,13 @@ function civimobile_menu() {
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );
+	$items['civimobile/structure'] = array(
+      'title'            => 'Contact',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('pagestructure',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
   
   return $items;
 }
@@ -52,7 +59,12 @@ function _civimobile_home_page() {
   return NULL;
 }
 
-
+function _civimobile_page($page,$param= null ) {
+  //$civimobile_page_settings = _civimobile_vars_setup();
+  $pagepath = drupal_get_path('module','civimobile')."/templates/civimobile.$page.tpl.php";
+  include_once($pagepath);
+  return NULL;
+}
 // function _civimobile_vars_setup() {
 //   //  Left to somebody more knowledgeable than me to figure out
 //   //  can't figure out how to load civicrm's Config.php file from here
