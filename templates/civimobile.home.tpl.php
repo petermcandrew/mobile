@@ -35,8 +35,9 @@
 	    <a href="#" id="save-contact" data-role="button" data-theme="b">Save Contact</a> 
 	    </div>
 	</div><!-- /content -->
-</div><!-- /page -->
 <?php require('civimobile.navbar.php'); ?>
+	
+</div><!-- /page -->
 
 <script>
 
