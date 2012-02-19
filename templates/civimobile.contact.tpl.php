@@ -25,7 +25,7 @@ var contact = <?php echo json_encode($results); ?>;
 	<div data-role="header">
 		<h1>Contact details</h1>
 		<a href="#" id="edit-contact-button" data-role="button" class="ui-btn-right jqm-edit">Edit</a>
-		<a style="display:none" href="#" id="done-contact-button" data-role="button" data-icon="delete" class="ui-btn-left jqm-cancel">Cancel</a>
+		<a style="display:none" href="#" id="cancel-contact-button" data-role="button" data-icon="delete" class="ui-btn-left jqm-cancel">Cancel</a>
 		<a style="display:none" href="#" id="save-contact-button" data-role="button" data-icon="check" class="ui-btn-right jqm-save">Save</a>
 	</div><!-- /header -->
 	
@@ -57,6 +57,8 @@ var contact = <?php echo json_encode($results); ?>;
 
 $( function(){
 	$('#edit-contact-button').click(function(){ editContact(); });
+	$('#cancel-contact-button').click(function(){ cancelEditContact(); });
+	
 	//console.log(contact.values[contactId]);
 	//console.log(contactId);
 		//Set field values from JSON
@@ -65,22 +67,30 @@ $( function(){
 	$('#email').val(contact.values[contactId].email);
 	$('#tel').val(contact.values[contactId].phone);
 	$("#edit-contact :input").attr("disabled", "disabled");
-		//Hide any blank fields
-	      $("#edit-contact :input").each(function (i) {
-			if (!this.value){
-				// console.log(this.value);
-				$(this).hide();	
-			}
-	      });
+	hideEmptyFields();
 	
 });
 function editContact(){
-	console.log("editContact called.")
 	$("#edit-contact :input").removeAttr("disabled");
 	$('#edit-contact-button').hide();
-	$('#done-contact-button').show();
+	$('#cancel-contact-button').show();
 	$('#save-contact-button').show();
-	
+}
+
+function cancelEditContact(){
+	$("#edit-contact :input").attr("disabled", "disabled");
+	$('#cancel-contact-button').hide();
+	$('#save-contact-button').hide();
+	$('#edit-contact-button').show();
+	hideEmptyFields();
+}
+
+function hideEmptyFields(){
+		$("#edit-contact :input").each(function (i) {
+		if (!this.value){
+			$(this).hide();	
+		}
+	  });
 }
 
 </script>
