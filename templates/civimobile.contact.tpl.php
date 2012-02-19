@@ -24,8 +24,9 @@ var contact = <?php echo json_encode($results); ?>;
 
 	<div data-role="header">
 		<h1>Contact details</h1>
-		<a href="#" id="edit-contact-button" data-role="button" class="ui-btn-right jqm-home">Edit</a>
-		<a style="display:none" href="#" id="done-contact-button" data-role="button" data-icon="delete" class="ui-btn-left jqm-back">Cancel</a>
+		<a href="#" id="edit-contact-button" data-role="button" class="ui-btn-right jqm-edit">Edit</a>
+		<a style="display:none" href="#" id="done-contact-button" data-role="button" data-icon="delete" class="ui-btn-left jqm-cancel">Cancel</a>
+		<a style="display:none" href="#" id="save-contact-button" data-role="button" data-icon="check" class="ui-btn-right jqm-save">Save</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="contact-details-content">
@@ -55,18 +56,32 @@ var contact = <?php echo json_encode($results); ?>;
 <script>
 
 $( function(){
-	console.log(contact.values[contactId]);
+	$('#edit-contact-button').click(function(){ editContact(); });
+	//console.log(contact.values[contactId]);
 	//console.log(contactId);
-	
+		//Set field values from JSON
 	$('#first_name').val(contact.values[contactId].first_name);
 	$('#last_name').val(contact.values[contactId].last_name);
 	$('#email').val(contact.values[contactId].email);
 	$('#tel').val(contact.values[contactId].phone);
 	$("#edit-contact :input").attr("disabled", "disabled");
-	// $("#first_name").attr("disabled", "disabled");
-	//$('#note').val(contact.values[contactId].note);
+		//Hide any blank fields
+	      $("#edit-contact :input").each(function (i) {
+			if (!this.value){
+				// console.log(this.value);
+				$(this).hide();	
+			}
+	      });
 	
 });
+function editContact(){
+	console.log("editContact called.")
+	$("#edit-contact :input").removeAttr("disabled");
+	$('#edit-contact-button').hide();
+	$('#done-contact-button').show();
+	$('#save-contact-button').show();
+	
+}
 
 </script>
 
