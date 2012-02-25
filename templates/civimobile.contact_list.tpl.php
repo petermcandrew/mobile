@@ -9,12 +9,14 @@
 	</div><!-- /header -->
 	
 	<div data-role="content" id="contact-content">
+		<div class="content-primary">
+		
 		<div id="contact-search-list">
     		<div class="ui-listview-filter ui-bar-c">
 		        <input type="search" name="search" placeholder="Search for contacts" id="search" value="" />
 		    </div>
-			<div id="contact-list">
-		    </div>
+			<ul data-role="listview" data-theme="g" id="contact-list">
+		    </ul>
 		</div>
 		<div style="display:none" id="add_contact">
 	    <div data-role="fieldcontain">
@@ -34,6 +36,7 @@
 	    </div>
 	    <a href="#" id="save-contact" data-role="button" data-theme="b">Save Contact</a> 
 	    </div>
+	</div><!-- /content-primary -->
 	</div><!-- /content -->
 <?php require('civimobile.navbar.php'); ?>
 	
@@ -70,7 +73,9 @@ function contactSearch(q) {
           //alert("some results");
 			$("#contact-list").empty();
 			$.each(data.values, function(index, value) {
-				$('#contact-list').append("<li class='ui-li ui-li-static ui-body-c'>" + value.display_name + "</li>");
+				$('#contact-list').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="contact-'+value.contact_id+'" ><a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a></li>');
+				$("#contact-list").listview('refresh');
+				//<a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a>
 			});		}
            $.mobile.hidePageLoadingMsg( );
 			}
