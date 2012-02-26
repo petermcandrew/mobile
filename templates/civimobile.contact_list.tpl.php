@@ -68,12 +68,14 @@ function contactSearch(q) {
               if (data.count == 0) {
 				$("#contact-list").empty();
 				$("#contact-list").append("no results found");
+				 $.mobile.hidePageLoadingMsg( );
               }
               else {
           //alert("some results");
+			var page_path = '<?php echo $_SERVER['REQUEST_URI'];  ?>'
 			$("#contact-list").empty();
 			$.each(data.values, function(index, value) {
-				$('#contact-list').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="contact-'+value.contact_id+'" ><a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a></li>');
+				$('#contact-list').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="contact-'+value.contact_id+'" ><a href="'+page_path+'/'+value.contact_id+'" >'+value.display_name+'</a></li>');
 				$("#contact-list").listview('refresh');
 				//<a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a>
 			});		}

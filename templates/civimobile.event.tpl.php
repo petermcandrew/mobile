@@ -3,7 +3,7 @@
 <div data-role="page">
 
 	<div data-role="header">
-		<h1>Events</h1>
+		<h1>Event participants</h1>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="event-content">
@@ -23,7 +23,6 @@
 
 
 <script>
-var page_path = '<?php echo $_SERVER['REQUEST_URI'];  ?>'
 //console.log(page_path);
 $( function(){
 	$().crmAPI ('Event','get',{'version' :'3'}

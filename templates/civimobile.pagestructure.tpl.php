@@ -5,13 +5,11 @@
 	<div data-role="header">
 		<h1>My Title</h1>
 	</div><!-- /header -->
-	<div class="content-primary">
 	
 	<div data-role="content">	
 		<p>Hello world</p>	
 		
 	</div><!-- /content -->
-	</div><!-- /content-primary -->
 
 </div><!-- /page -->
 
