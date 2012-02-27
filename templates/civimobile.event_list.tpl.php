@@ -38,7 +38,7 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#event-list").append('<li><a href="'+page_path+'/'+value.id+'">'+value.title+'<br />('+value.start_date+')</a></li>');
+				$("#event-list").append('<li><a href="'+value.id+'">'+value.title+'<br />('+value.start_date+')</a></li>');
 				$("#event-list").listview('refresh');
 			 			});		
 				}

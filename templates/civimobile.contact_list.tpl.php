@@ -60,7 +60,7 @@ $( function(){
 function contactSearch(q) {
 	$('input#search').blur();
     $.mobile.showPageLoadingMsg( 'Searching' );
-    $().crmAPI ('Contact','get',{'version' :'3', 'sort_name': q, 'return' : 'display_name,phone' }
+    $().crmAPI ('Contact','get',{'version' :'3', 'sort_name': q, 'return' : 'display_name' }
           ,{
             ajaxURL: crmajaxURL,
             success:function (data){
@@ -74,11 +74,12 @@ function contactSearch(q) {
           //alert("some results");
 			var page_path = '<?php echo $_SERVER['REQUEST_URI'];  ?>'
 			$("#contact-list").empty();
+			console.log(page_path);
 			$.each(data.values, function(index, value) {
-				$('#contact-list').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="contact-'+value.contact_id+'" ><a href="'+page_path+'/'+value.contact_id+'" >'+value.display_name+'</a></li>');
-				$("#contact-list").listview('refresh');
+				$('#contact-list').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="contact-'+value.contact_id+'" ><a href="'+value.contact_id+'">'+value.display_name+'</a></li>');
 				//<a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a>
 			});		}
+			$("#contact-list").listview('refresh');
            $.mobile.hidePageLoadingMsg( );
 			}
 	});

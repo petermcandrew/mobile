@@ -6,10 +6,11 @@
 		<h1>Event participants</h1>
 	</div><!-- /header -->
 	
-	<div data-role="content" id="event-content">
+	<div data-role="content" id="participants-content">
 		<div class="content-primary">
 		
-			<ul data-role="listview" data-theme="c" id="event-list">
+			<ul data-role="listview" data-theme="c" id="participants-list">
+
 		    </ul>
 		
 		</div><!-- /content-primary -->
@@ -23,22 +24,20 @@
 
 
 <script>
-//console.log(page_path);
+console.log(page_path);
 $( function(){
-	$().crmAPI ('Event','get',{'version' :'3'}
+	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' :'1'}
           ,{
             ajaxURL: crmajaxURL,
             success:function (data){
 			console.log(data.values);
-			//alert("Sorry I couldn't find any events to display");
-			
               if (data.count == 0) {
-				alert("Sorry I couldn't find any events to display");
+				$("#participants-list").append("no results found");
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#event-list").append('<li><a href="'+page_path+'/'+value.id+'">'+value.title+'<br />('+value.start_date+')</a></li>');
-				$("#event-list").listview('refresh');
+				$("#participants-list").append('<li>'+value.display_name+'</li>');
+				$("#participants-list").listview('refresh');
 			 			});		
 				}
 			}
