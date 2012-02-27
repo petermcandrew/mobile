@@ -26,6 +26,7 @@
 
 <script>
 $( function(){
+	console.log("h")
 	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' :'1'}
           ,{
             ajaxURL: crmajaxURL,
@@ -36,11 +37,12 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#participants-list").append('<li><a>'+value.display_name+'</a><a href="#" data-theme="a" data-icon="check"></a></li>');
+				$("#participants-list").append('<li><a>'+value.display_name+'</a><a id="contact_'+value.contact_id+'" href="#" data-theme="a" data-icon="check"></a></li>');
 				$("#participants-list").listview('refresh');
 			 			});		
 				}
 			}
 			});
+			$("#contact_74").click('pageinit',function(){ console.log("hello"); });
 });
 </script>
