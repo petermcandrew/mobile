@@ -4,7 +4,7 @@
 
 	<div data-role="header">
 		<h1>Event participants</h1>
-		
+		<a href="#" id="checkin-contact-button" data-role="button" data-theme="e" class="ui-btn-right jqm-home">Checkin</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="participants-content">
@@ -25,7 +25,6 @@
 
 
 <script>
-console.log(page_path);
 $( function(){
 	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' :'1'}
           ,{
@@ -37,7 +36,7 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#participants-list").append('<li>'+value.display_name+'</li>');
+				$("#participants-list").append('<li><a>'+value.display_name+'</a><a href="#" data-theme="a" data-icon="check"></a></li>');
 				$("#participants-list").listview('refresh');
 			 			});		
 				}
