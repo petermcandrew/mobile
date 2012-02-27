@@ -13,6 +13,14 @@ function civimobile_menu() {
     $items = array();
     
     // CiviMobile Homepage
+	$items['civimobile'] = array(
+      'title'            => 'CiviMobile',
+      'description'      => 'A small but very effective mobile interface to your CiviCRM installation.',
+      'page callback'    => '_civimobile_page',
+	  'page arguments'   => array('home',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
     $items['civimobile/contact'] = array(
       'title'            => 'CiviMobile',
       'description'      => 'A small but very effective mobile interface to your CiviCRM installation.',

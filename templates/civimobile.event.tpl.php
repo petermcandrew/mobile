@@ -4,6 +4,7 @@
 
 	<div data-role="header">
 		<h1>Event participants</h1>
+		
 	</div><!-- /header -->
 	
 	<div data-role="content" id="participants-content">

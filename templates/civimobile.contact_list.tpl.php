@@ -6,6 +6,7 @@
 		<h1>Contacts</h1>
 		<a href="#" id="add-contact-button" data-role="button" data-icon="plus" class="ui-btn-right jqm-home">Add</a>
 		<a style="display:none" href="#" id="back-contact-button" data-role="button" data-icon="delete" class="ui-btn-left jqm-back">Cancel</a>
+		<a href="/civimobile" id="contact-home-button" data-ajax="false" data-direction="reverse" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-left jqm-home">Home</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="contact-content">

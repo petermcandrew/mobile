@@ -4,6 +4,7 @@
 
 	<div data-role="header">
 		<h1>Events</h1>
+		<a href="/civimobile" data-ajax="false" data-direction="reverse" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-left jqm-home">Home</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="event-content">
