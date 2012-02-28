@@ -1,4 +1,12 @@
-<?php require_once('civimobile.header.php'); ?>
+<?php require_once('civimobile.header.php'); 
+
+$path=$_SERVER['REQUEST_URI'];
+$split = explode ( "/" , $path );
+$id = end($split);
+
+?>
+
+
 
 <div data-role="page">
 
@@ -25,7 +33,9 @@
 
 <script>
 $( function(){
-	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' :'1'}
+	var event_id = "<?php echo $id; ?>"
+	console.log(event_id);
+	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' : event_id}
           ,{
             ajaxURL: crmajaxURL,
             success:function (data){
