@@ -25,24 +25,30 @@
 
 <script>
 $( function(){
-	console.log("h")
 	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' :'1'}
           ,{
             ajaxURL: crmajaxURL,
             success:function (data){
-			console.log(data.values);
               if (data.count == 0) {
 				$("#participants-list").append("no results found");
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#participants-list").append('<li><div>'+value.display_name+'</div><a id="checkin_'+value.id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" style="float:right;" href="#">Check in</a></li>');
+				$("#participants-list").append('<li id="row_'+value.id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" style="float:right;" href="#">Check-in</a></li>');
 				$("#participants-list").listview('refresh');
 			 			});		
+				$("[id^=checkinBtn_]").click(function(event){ checkinParticipant(event.target.id); });
 				}
 			}
 			});
 			
-			$("#contact_74").click('pageinit',function(){ console.log("hello"); });
 });
+function checkinParticipant(p){
+	var elements = p.split('_')
+	contact_id = elements[elements.length-1];
+	console.log(contact_id);
+	$('#row_'+contact_id).fadeOut();
+	$("#participants-list").listview('refresh');
+	
+}
 </script>
