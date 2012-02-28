@@ -14,12 +14,6 @@ $params = array ('version' =>'3',
 $results=civicrm_api("Contact","get",$params );
 // print_r($results);
 ?>
-
-<script>
-var contactId = <?php echo $id; ?>;
-var contact = <?php echo json_encode($results); ?>;
-</script>
-
 <div data-role="page">
 
 	<div data-role="header">
@@ -54,14 +48,13 @@ var contact = <?php echo json_encode($results); ?>;
 
 
 <script>
+var contactId = <?php echo $id; ?>;
+var contact = <?php echo json_encode($results); ?>;
 
 $( function(){
 	$('#edit-contact-button').click(function(){ editContact(); });
 	$('#cancel-contact-button').click(function(){ cancelEditContact(); });
-	
-	//console.log(contact.values[contactId]);
-	//console.log(contactId);
-		//Set field values from JSON
+	$('#save-contact-button').click(function(){ updateContact(); });
 	$('#first_name').val(contact.values[contactId].first_name);
 	$('#last_name').val(contact.values[contactId].last_name);
 	$('#email').val(contact.values[contactId].email);
@@ -86,12 +79,48 @@ function cancelEditContact(){
 }
 
 function hideEmptyFields(){
-		$("#edit-contact :input").each(function (i) {
+	$("#edit-contact :input").each(function (i) {
 		if (!this.value){
 			$(this).hide();	
 		}
 	  });
 }
+function updateContact() {
+      first_name = $('#first_name').val(); 
+      last_name = $('#last_name').val(); 
+      phone = $('#tel').val(); 
+      email = $('#email').val(); 
+      note = $('#note').val(); 
+   
+        $().crmAPI ('Contact','update',{
+            'version' :'3',
+ 			'id' : contactId,
+            'contact_type' :'Individual', // only individuals for now
+            'first_name' :first_name, 
+            'last_name' : last_name, 
+            'phone' : phone, 
+            'email' : email 			}
+          ,{ success:function (data){    
+			console.log("this is the returned contact id: " + data.id )
+              // create the note if one exists
+				if (note){
+				$().crmAPI ('Note','create',{
+					'version' :'3',
+					'entity_id' : data.id,
+					'note' : note
+					}
+				  ,{ success:function (data){    
+			      console.log("note created");
+				    }
+				});}
+				else{
+					console.log("there was no note");
+				} 
+				window.location.href = "/civimobile/contact/"+data.id;
+            }
+        });
+}	
+
 
 </script>
 

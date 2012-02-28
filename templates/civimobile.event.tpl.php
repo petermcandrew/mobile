@@ -16,6 +16,8 @@
 		
 		</div><!-- /content-primary -->
 	</div><!-- /content -->
+<?php require_once('civimobile.navbar.php') ?>
+	
 </div><!-- /page -->
 
 <?php require_once('civimobile.footer.php') ?>
@@ -32,7 +34,7 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#participants-list").append('<li id="row_'+value.id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" style="float:right;" href="#">Check-in</a></li>');
+				$("#participants-list").append('<li id="row_'+value.participant_id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.participant_id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" style="float:right;" href="#">Check-in</a></li>');
 				$("#participants-list").listview('refresh');
 			 			});		
 				$("[id^=checkinBtn_]").click(function(event){ checkinParticipant(event.target.id); });
@@ -43,10 +45,19 @@ $( function(){
 });
 function checkinParticipant(p){
 	var elements = p.split('_')
-	contact_id = elements[elements.length-1];
-	console.log(contact_id);
-	$('#row_'+contact_id).fadeOut();
-	$("#participants-list").listview('refresh');
+	participant_id = elements[elements.length-1];
+	console.log(participant_id);
+	$().crmAPI ('Participant','update',{'version' :'3', 'event_id' :'1', 'id' : participant_id, status_id : '2' }
+          ,{
+            ajaxURL: crmajaxURL,
+            success:function (data){
+            console.log("success");
+			$('#row_'+participant_id).slideUp(1000, function(){
+				$("#participants-list").listview('refresh');
+			});
+			}
+		});
+	
 	
 	
 }

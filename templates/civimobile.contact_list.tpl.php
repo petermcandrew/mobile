@@ -68,7 +68,8 @@ function contactSearch(q) {
 			console.log(data.values);
               if (data.count == 0) {
 				$("#contact-list").empty();
-				$("#contact-list").append("no results found");
+				$("#contact-list").append("<li>no results found</li>");
+				$("#contact-list").listview('refresh');
 				 $.mobile.hidePageLoadingMsg( );
               }
               else {
@@ -77,7 +78,7 @@ function contactSearch(q) {
 			$("#contact-list").empty();
 			console.log(page_path);
 			$.each(data.values, function(index, value) {
-				$('#contact-list').append('<li role="option" tabindex="-1" data-ajax="false" data-theme="c" id="contact-'+value.contact_id+'" ><a href="'+value.contact_id+'">'+value.display_name+'</a></li>');
+				$('#contact-list').append('<li role="option" tabindex="-1" data-theme="c" id="contact-'+value.contact_id+'" ><a href="http://mobile.local/civimobile/contact/'+value.contact_id+'" data-ajax="false">'+value.display_name+' </a></li>');
 				//<a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a>
 			});		}
 			$("#contact-list").listview('refresh');
@@ -90,6 +91,7 @@ function addContact() {
 	//$('#contact-content').append($('#add_contact')); ******* is this line necessary?
 	$('#contact-search-list').hide();
 	$('#add-contact-button').hide();
+	$('#contact-home-button').hide();
 	$('#add_contact').show();
 	$('#back-contact-button').show();
 	$('#save-contact').click(function(){ createContact(); });
@@ -130,9 +132,10 @@ function createContact() {
 				else{
 					console.log("there was no note");
 				}
-			$.mobile.changePage("/civimobile/contact/"+data.id);
+			window.location.href = "/civimobile/contact/"+data.id;
             }
         });
-    }
+}
+	
 </script>
 <?php require('civimobile.footer.php'); ?>

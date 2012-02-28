@@ -39,9 +39,9 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#event-list").append('<li><a href="'+value.id+'">'+value.title+'<br />('+value.start_date+')</a></li>');
-				$("#event-list").listview('refresh');
-			 			});		
+				$("#event-list").append('<li><a href="'+value.id+'" data-ajax="false">'+value.title+'<br />('+value.start_date+')</a></li>');
+			 			});
+			$("#event-list").listview('refresh');
 				}
 			}
 			});
