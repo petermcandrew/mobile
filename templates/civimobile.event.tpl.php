@@ -4,7 +4,6 @@
 
 	<div data-role="header">
 		<h1>Event participants</h1>
-		<a href="#" id="checkin-contact-button" data-role="button" data-theme="e" class="ui-btn-right jqm-home">Checkin</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="participants-content">
@@ -37,12 +36,13 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#participants-list").append('<li><a>'+value.display_name+'</a><a id="contact_'+value.contact_id+'" href="#" data-theme="a" data-icon="check"></a></li>');
+				$("#participants-list").append('<li><div>'+value.display_name+'</div><a id="checkin_'+value.id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" style="float:right;" href="#">Check in</a></li>');
 				$("#participants-list").listview('refresh');
 			 			});		
 				}
 			}
 			});
+			
 			$("#contact_74").click('pageinit',function(){ console.log("hello"); });
 });
 </script>
