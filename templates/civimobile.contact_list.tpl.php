@@ -78,7 +78,7 @@ function contactSearch(q) {
 			$("#contact-list").empty();
 			console.log(page_path);
 			$.each(data.values, function(index, value) {
-				$('#contact-list').append('<li role="option" tabindex="-1" data-theme="c" id="contact-'+value.contact_id+'" ><a href="http://mobile.local/civimobile/contact/'+value.contact_id+'" data-ajax="false">'+value.display_name+' </a></li>');
+				$('#contact-list').append('<li role="option" tabindex="-1" data-theme="c" id="contact-'+value.contact_id+'" ><a href="'+value.contact_id+'" data-ajax="false">'+value.display_name+' </a></li>');
 				//<a href="#contact/'+value.contact_id+'" data-role="contact-'+value.contact_id+'">'+value.display_name+'</a>
 			});		}
 			$("#contact-list").listview('refresh');
