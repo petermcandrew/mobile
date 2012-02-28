@@ -4,6 +4,7 @@
 
 	<div data-role="header">
 		<h1>Event participants</h1>
+		<a href="#" data-rel="back" class="ui-btn-left" data-icon="arrow-l">Back</a>
 	</div><!-- /header -->
 	
 	<div data-role="content" id="participants-content">
@@ -15,9 +16,6 @@
 		
 		</div><!-- /content-primary -->
 	</div><!-- /content -->
-
-<?php require_once('civimobile.navbar.php') ?>
-
 </div><!-- /page -->
 
 <?php require_once('civimobile.footer.php') ?>
@@ -49,6 +47,7 @@ function checkinParticipant(p){
 	console.log(contact_id);
 	$('#row_'+contact_id).fadeOut();
 	$("#participants-list").listview('refresh');
+	
 	
 }
 </script>
