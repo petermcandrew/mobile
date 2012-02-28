@@ -62,7 +62,7 @@ function checkinParticipant(p){
             ajaxURL: crmajaxURL,
             success:function (data){
             console.log("success");
-			$('#row_'+participant_id).slideUp(1000, function(){
+			$('#row_'+participant_id).fadeOut(1000, function(){
 				$("#participants-list").listview('refresh');
 			});
 			}
