@@ -44,7 +44,7 @@ $( function(){
               }
               else {
 			 $.each(data.values, function(index, value) {
-				$("#participants-list").append('<li id="row_'+value.participant_id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.participant_id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" style="float:right;" href="#">Check-in</a></li>');
+				$("#participants-list").append('<li id="row_'+value.participant_id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.participant_id+'" class="ui-btn ui-btn-corner-all ui-shadow ui-btn-right" data-theme="c" href="#">Check-in</a></li>');
 				$("#participants-list").listview('refresh');
 			 			});		
 				$("[id^=checkinBtn_]").click(function(event){ checkinParticipant(event.target.id); });
