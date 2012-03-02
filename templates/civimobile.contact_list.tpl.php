@@ -101,6 +101,7 @@ function hideAddContact() {
 	$('#back-contact-button').hide();
 	$('#contact-search-list').show();
 	$('#add-contact-button').show();
+	$("#contact-list").listview('refresh');
 }
 function createContact() {
       first_name = $('#first_name').val(); 

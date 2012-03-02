@@ -1871,6 +1871,7 @@ span.ui-slider-label-b { right: -100%;  margin-left: -1px }
 /* Participant list */
 #participants-list li { overflow: hidden; }
 #participants-list .ui-btn-text div { float: left; padding: 14px 5px; }
-#participants-list a.ui-btn { float: right; padding: 6px 10px; }
+#participants-list a.ui-btn-right { float: right; padding: 6px 10px; }
+#participants-list a.ui-btn { padding: 6px 10px; }
 #participants-list .ui-btn-inner span.ui-icon { display: none; visibility: hidden; }
 
