@@ -28,7 +28,7 @@ $id = end($split);
 $( function(){
 	var event_id = "<?php echo $id; ?>"
 	console.log(event_id);
-	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' : event_id}
+	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' : event_id, 'participant_status_id' : '1'||'5' }
           ,{
             ajaxURL: crmajaxURL,
             success:function (data){
@@ -49,44 +49,46 @@ $( function(){
 			}
 		});
 
-});
-function checkinParticipant(pid,psid){
-	removeUndoBtn();
-	console.log("the data-participant-status-id is "+psid);
-	console.log("data-participant-id is "+pid);
-	$().crmAPI ('Participant','update',{'version' :'3', 'event_id' :'1', 'id' : pid, 'status_id' : '2'	}
-          ,{
-            ajaxURL: crmajaxURL,
-            success:function (data){
-			$('#checkinBtn_'+pid).css("color","");
-			$('#row_'+pid).children().hide();
-			$('#row_'+pid).append('<a href="#" id="undoBtn_'+pid+'" data-participant-id="'+pid+'" data-prevous-participant-status-id="'+psid+'"class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow" data-role="button" data-theme="c">Undo check-in</a>');
-			$("[id^=undoBtn_]").click(function(event){
-				undoCheckinParticipant($(this).attr('data-participant-id'),$(this).attr('data-previous-participant-status-id'));
+		function checkinParticipant(pid,psid){
+			removeUndoBtn();
+			$().crmAPI ('Participant','update',{'version' :'3', 'event_id' : event_id, 'id' : pid, 'status_id' : '2' }
+			,{
+				ajaxURL: crmajaxURL,
+				success:function (data){
+					$('#checkinBtn_'+pid).css("color","");
+					$('#row_'+pid).children().hide();
+					$('#row_'+pid).append('<a href="#" id="undoBtn_'+pid+'" data-participant-id="'+pid+'" data-prevous-participant-status-id="'+psid+'"class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow" data-role="button" data-theme="c">Undo check-in</a>');
+					$("[id^=undoBtn_]").click(function(event){
+						undoCheckinParticipant($(this).attr('data-participant-id'),$(this).attr('data-previous-participant-status-id'));
+					});
+				}
 			});
-			}
-		});
-}
-function undoCheckinParticipant(pid,ppsid){
-	$().crmAPI ('Participant','update',{'version' :'3', 'event_id' :'1', 'id' : pid, 'status_id' : ppsid }
-          ,{
-            ajaxURL: crmajaxURL,
-            success:function (data){
-			//hide undo button
-			$('#undoBtn_'+pid).remove();
-			//show checkin row
-			$('#row_'+pid).children().show();
-			$("#participants-list").listview('refresh');
-			}
-		});
-}
-function removeUndoBtn(){
-	console.log("removeCheckinBtn called");
-	$("[id^=undoBtn_]").each(function(index, value) {
-		$(this).delay(1000).slideUp("normal", function() { 
-			$(this).parent().remove(); 
-			$("#participants-list").listview('refresh');
-		});		
-	});
-}
+		}
+		
+		function undoCheckinParticipant(pid,ppsid){
+			$().crmAPI ('Participant','update',{'version' :'3', 'event_id' : event_id, 'id' : pid, 'status_id' : ppsid }
+		          ,{
+		            ajaxURL: crmajaxURL,
+		            success:function (data){
+					//hide undo button
+					$('#undoBtn_'+pid).remove();
+					//show checkin row
+					$('#row_'+pid).children().show();
+					$("#participants-list").listview('refresh');
+					}
+				});
+		}
+		function removeUndoBtn(){
+			console.log("removeCheckinBtn called");
+			$("[id^=undoBtn_]").each(function(index, value) {
+				$(this).delay(1000).slideUp("normal", function() { 
+					$(this).parent().remove(); 
+					$("#participants-list").listview('refresh');
+				});		
+			});
+		}
+
+});
+
+
 </script>
