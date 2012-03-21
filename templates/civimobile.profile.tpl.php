@@ -7,40 +7,29 @@ require_once('initialise.php');
 $path=$_SERVER['REQUEST_URI'];
 $split = explode ( "/" , $path );
 $id = end($split);
-//api call to get contact
-$params = array ('version' =>'3',
-				'contact_id' => $id
-				);
-$results=civicrm_api("Contact","get",$params );
-// print_r($results);
+//api call to get fields from profile
+$params=array('version' =>'3','uf_group_id' => $id);
+$results=civicrm_api("UFField","get", $params);
+$results=$results['values'];
+
+foreach($results as $result){
+	print_r($result['field_name']."\n");
+}
+print_r($results);exit;
+
 ?>
 <div data-role="page">
-	<div data-role="header">
-		<h1>Contact details</h1>
-		<a href="#" id="edit-contact-button" data-role="button" class="ui-btn-right jqm-edit">Edit</a>
-		<a href="#" id="back-contact-button"data-rel="back" class="ui-btn-left" data-icon="arrow-l">Back</a>
-		<a style="display:none" href="#" id="cancel-contact-button" data-role="button" data-icon="delete" class="ui-btn-left jqm-cancel">Cancel</a>
-		<a style="display:none" href="#" id="save-contact-button" data-role="button" data-icon="check" class="ui-btn-right jqm-save">Save</a>
-	</div><!-- /header -->
 
-	<div data-role="content" id="contact-details-content">
-		<div id="edit-contact">
-		   	<div data-role="fieldcontain">
-		        <input type="text" name="first_name" id="first_name" value="" placeholder="First Name" />
-		    </div>
-		    <div data-role="fieldcontain">
-		        <input type="text" name="last_name" id="last_name" value="" placeholder="Last Name" />
-		    </div>
-		    <div data-role="fieldcontain">
-		        <input type="email" name="email" id="email" value="" placeholder="Email" />
-		    </div>    
-		    <div data-role="fieldcontain">
-		        <input type="tel" name="tel" id="tel" value="" placeholder="Phone" />
-		    </div>
-		    <div data-role="fieldcontain">
-		    	<textarea cols="40" rows="8" name="note" id="note" placeholder="Note"></textarea>
-		    </div>
-		    <a style="display:none" href="#" id="save-contact" data-role="button" data-theme="b">Save Contact</a> 
+	<div data-role="header">
+		<h1>Profile <?php print_r($id); ?></h1>
+	</div><!-- /header -->
+	<div data-role="content" id="profile-<?php print_r($id); ?>">
+		<div id="profile-<?php print_r($id); ?>-fields">
+			<?php foreach($results as $result){
+				print_r('<div data-role="fieldcontain">
+			        		<input type="text" name="'.$result['field_name'].'" id="'.$result['field_name'].'-'.$id.'" value="" placeholder="'.$result['field_name'].'" />
+			    		</div>');
+			}?>
 	    </div>
 	</div><!-- /content -->
 	<?php require_once('civimobile.navbar.php') ?>
@@ -66,7 +55,6 @@ $( function(){
 function editContact(){
 	$("#edit-contact :input").removeAttr("disabled");
 	$('#edit-contact-button').hide();
-	$('#back-contact-button').hide();
 	$('#cancel-contact-button').show();
 	$('#save-contact-button').show();
 }
@@ -76,7 +64,6 @@ function cancelEditContact(){
 	$('#cancel-contact-button').hide();
 	$('#save-contact-button').hide();
 	$('#edit-contact-button').show();
-	$('#back-contact-button').show();
 	hideEmptyFields();
 }
 
