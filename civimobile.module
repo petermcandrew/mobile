@@ -50,17 +50,24 @@ function civimobile_menu() {
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );
-	$items['civimobile/profile'] = array(
-      'title'            => 'Profile',
-      'page callback'    => '_civimobile_page',
-      'page arguments'   => array('profile'),
-      'access arguments' => array('access CiviCRM'),
-      'type'             => MENU_NORMAL_ITEM,
-    );
 	$items['civimobile/event/%'] = array(
       'title'            => 'Event',
       'page callback'    => '_civimobile_page',
       'page arguments'   => array('event',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
+	$items['civimobile/profile'] = array(
+      'title'            => 'ProfileList',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('profile_list'),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
+	$items['civimobile/profile/%'] = array(
+      'title'            => 'Profile',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('profile'),
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );

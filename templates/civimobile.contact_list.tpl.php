@@ -68,7 +68,7 @@ function contactSearch(q) {
 			console.log(data.values);
               if (data.count == 0) {
 				$("#contact-list").empty();
-				$("#contact-list").append("<li>no results found</li>");
+				$("#contact-list").append('<li data-theme="c">No results found</li>');
 				$("#contact-list").listview('refresh');
 				 $.mobile.hidePageLoadingMsg( );
               }
