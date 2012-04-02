@@ -28,7 +28,7 @@ $id = end($split);
 $( function(){
 	var event_id = "<?php echo $id; ?>"
 	console.log(event_id);
-	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' : event_id, 'participant_status_id' : '1'||'5' }
+	$().crmAPI ('Participant','get',{'version' :'3', 'event_id' : event_id, 'participant_status_id' : '1'||'5', 'rowCount' : '200' }
           ,{
             ajaxURL: crmajaxURL,
             success:function (data){
