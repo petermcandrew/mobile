@@ -1,10 +1,9 @@
 <?php 
 require_once('civimobile.header.php');
 require_once('initialise.php');
-
-
 //Get the id from the URL
 $path=$_SERVER['REQUEST_URI'];
+$split = trim ( $path, "/" );
 $split = explode ( "/" , $path );
 $id = end($split);
 //api call to get contact

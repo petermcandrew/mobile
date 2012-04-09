@@ -71,7 +71,27 @@ function civimobile_menu() {
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );
-  
+	$items['civimobile/survey'] = array(
+      'title'            => 'Case',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('survey_list',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
+	$items['civimobile/survey/%'] = array(
+      'title'            => 'Case',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('survey_respondents',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );
+  $items['civimobile/survey/%/%'] = array(
+      'title'            => 'Case',
+      'page callback'    => '_civimobile_page',
+      'page arguments'   => array('survey',2),
+      'access arguments' => array('access CiviCRM'),
+      'type'             => MENU_NORMAL_ITEM,
+    );  
   return $items;
 }
 
@@ -90,13 +110,15 @@ function civimobile_menu() {
 /**
  * Callback for menu item civimobile
  */
-function _civimobile_home_page() {
-  //$civimobile_page_settings = _civimobile_vars_setup();
-  include_once(drupal_get_path('module','civimobile').'/templates/civimobile.home.tpl.php');
-  return NULL;
-}
+// function _civimobile_home_page() {
+//   
+//   //$civimobile_page_settings = _civimobile_vars_setup();
+//   include_once(drupal_get_path('module','civimobile').'/templates/civimobile.home.tpl.php');
+//   return NULL;
+// }
 
 function _civimobile_page($page,$param= null ) {
+  civicrm_initialize();  
   //$civimobile_page_settings = _civimobile_vars_setup();
   $pagepath = drupal_get_path('module','civimobile')."/templates/civimobile.$page.tpl.php";
   include_once($pagepath);
@@ -106,7 +128,6 @@ function _civimobile_page($page,$param= null ) {
 //   //  Left to somebody more knowledgeable than me to figure out
 //   //  can't figure out how to load civicrm's Config.php file from here
 //   //
-//     civicrm_initialize();
 //     require_once 'api/api.php';
 // 
 //     if ( CRM_Utils_Array::value( 'locale', $GLOBALS ) ) { 

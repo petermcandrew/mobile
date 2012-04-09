@@ -3,6 +3,7 @@
   <ul>
     <li><a href="/civimobile/contact/" data-icon="search" data-ajax="false">Contacts</a></li>
 	<li><a href="/civimobile/event/" data-icon="grid" data-ajax="false">Events</a></li>
+	<li><a href="/civimobile/survey/" data-icon="info" data-ajax="false">Survey</a></li>
   </ul>
 </div>
 </div>
