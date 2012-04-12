@@ -3,7 +3,8 @@
 $path=$_SERVER['REQUEST_URI'];
 $split = trim ( $path, "/" );
 $split = explode ( "/" , $split );
-$id = end($split);
+array_pop($split);
+$id = array_pop($split);
 
 ?>
 <div data-role="page">
@@ -29,7 +30,7 @@ $id = end($split);
 $( function(){
 	var survey_id = "<?php echo $id; ?>"
 	console.log(survey_id);
-	$().crmAPI ('SurveyVoter','get',{'version': '3', 'id': survey_id}
+	$().crmAPI ('SurveyVoter','get',{'version': '3', 'id': survey_id, 'status_id': '1'}
 		,{ success:function (data){
 			console.log(data);
 			if (data.count == 0) {
@@ -38,7 +39,7 @@ $( function(){
 			}
 			else {
 				$.each(data.values, function(index, value) {
-				$('#respondants-list').append('<li role="option" tabindex="-1" data-theme="c" id="respondants-'+value.voter_id+'" ><a href="'+value.voter_id+'" data-ajax="false">'+value.voter_name+' </a></li>');
+				$('#respondants-list').append('<li role="option" tabindex="-1" data-theme="c" id="respondants-'+value.voter_id+'" ><a href="'+value.voter_id+'/'+value.id+'" data-ajax="false">'+value.voter_name+' </a></li>');
 				});
 			}
 			$("#respondants-list").listview('refresh');

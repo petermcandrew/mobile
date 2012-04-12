@@ -20,7 +20,7 @@ $id = end($split);
 		
 		</div><!-- /content-primary -->
 	</div><!-- /content -->
-<?php require_once('civimobile.navbar.php') ?>
+<?php require_once('civimobile.event.undobar.php') ?>
 </div><!-- /page -->
 <?php require_once('civimobile.footer.php') ?>
 
@@ -57,7 +57,8 @@ $( function(){
 				success:function (data){
 					$('#checkinBtn_'+pid).css("color","");
 					$('#row_'+pid).children().hide();
-					$('#row_'+pid).append('<a href="#" id="undoBtn_'+pid+'" data-participant-id="'+pid+'" data-prevous-participant-status-id="'+psid+'"class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow" data-role="button" data-theme="c">Undo check-in</a>');
+					
+					$('#row_'+pid).append('<a href="#" id="undoBtn_'+pid+'" data-participant-id="'+pid+'" data-prevous-participant-status-id="'+psid+'" class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow" data-role="button" data-theme="c">Undo check-in</a>');
 					$("[id^=undoBtn_]").click(function(event){
 						undoCheckinParticipant($(this).attr('data-participant-id'),$(this).attr('data-previous-participant-status-id'));
 					});

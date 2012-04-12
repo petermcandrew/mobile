@@ -78,14 +78,14 @@ function civimobile_menu() {
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );
-	$items['civimobile/survey/%'] = array(
+	$items['civimobile/survey/%/%'] = array(
       'title'            => 'Case',
       'page callback'    => '_civimobile_page',
       'page arguments'   => array('survey_respondents',2),
       'access arguments' => array('access CiviCRM'),
       'type'             => MENU_NORMAL_ITEM,
     );
-  $items['civimobile/survey/%/%'] = array(
+  $items['civimobile/survey/%/%/%'] = array(
       'title'            => 'Case',
       'page callback'    => '_civimobile_page',
       'page arguments'   => array('survey',2),

@@ -22,29 +22,23 @@
 
 <?php require_once('civimobile.footer.php') ?>
 
-
 <script>
-var page_path = '<?php echo $_SERVER['REQUEST_URI'];  ?>'
-//console.log(page_path);
 $( function(){
-	$().crmAPI ('Survey','get',{'version' :'3'}
-          ,{
-            ajaxURL: crmajaxURL,
-            success:function (data){
-			console.log(data.values);
-			//alert("Sorry I couldn't find any surveys to display");
-			
-              if (data.count == 0) {
-				alert("Sorry, I couldn't find any surveys to display");
-              }
-              else {
-			 $.each(data.values, function(index, value) {
-				$("#survey-list").append('<li><a href="'+value.id+'/" data-ajax="false">'+value.title+'</a></li>');
-			 			});
-			$("#survey-list").listview('refresh');
-				}
-			}
-			});
-	
+  $().crmAPI ('Survey','get',{'version' :'3'}
+  ,{
+    ajaxURL: crmajaxURL,
+    success:function (data){
+      console.log(data.values);
+      if (data.count == 0) {
+        alert("Sorry, I couldn't find any surveys to display");
+      }
+      else {
+        $.each(data.values, function(index, value) {
+          $("#survey-list").append('<li><a href="'+value.id+'/'+value.result_id+'/" data-ajax="false">'+value.title+'</a></li>');
+        });
+        $("#survey-list").listview('refresh');
+      }
+    }
+  });
 });
 </script>

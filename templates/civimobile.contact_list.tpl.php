@@ -93,7 +93,7 @@ $(function(){
       console.log(fieldIds); 
     }
   });
-});
+  });
 	
 	$('#add-contact-button').click(function(){ addContact(); });
 	$('#back-contact-button').click(function(){ hideAddContact(); });
