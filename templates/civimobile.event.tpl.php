@@ -6,23 +6,19 @@ $id = end($split);
 
 ?>
 <div data-role="page">
-
-	<div data-role="header">
-		<h1>Event participants</h1>
-		<a href="#" data-rel="back" class="ui-btn-left" data-icon="arrow-l">Back</a>
-	</div><!-- /header -->
-	
-	<div data-role="content" id="participants-content">
-		<div class="content-primary">
-		
-			<ul data-role="listview" data-theme="c" id="participants-list">
-		    </ul>
-		
-		</div><!-- /content-primary -->
-	</div><!-- /content -->
-<?php require_once('civimobile.event.undobar.php') ?>
+  <div data-role="header">
+    <h1>Event participants</h1>
+    <a href="#" data-rel="back" class="ui-btn-left" data-icon="arrow-l">Back</a>
+  </div><!-- /header -->
+  <div data-role="content" id="participants-content">
+    <div class="content-primary">
+      <ul data-role="listview" data-theme="c" id="participants-list">
+      </ul>
+    </div><!-- /content-primary -->
+  </div><!-- /content -->
+  <?php require_once('civimobile.event.undobar.php') ?>
 </div><!-- /page -->
-<?php require_once('civimobile.footer.php') ?>
+  <?php require_once('civimobile.footer.php') ?>
 
 <script>
 $( function(){
@@ -37,7 +33,7 @@ $( function(){
               }
               else {
 				$.each(data.values, function(index, value) {
-					$("#participants-list").append('<li id="row_'+value.participant_id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.participant_id+'" data-participant-id="'+value.participant_id+'" data-participant-status-id="'+value.participant_status_id+'" class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-btn-right" data-theme="c" href="#">Check-in</a></li>');
+					$("#participants-list").append('<li id="row_'+value.participant_id+'"><div>'+value.display_name+'</div><a id="checkinBtn_'+value.participant_id+'" data-participant-id="'+value.participant_id+'" data-participant-name="'+value.display_name+'" data-participant-status-id="'+value.participant_status_id+'" class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow ui-btn-right" data-theme="c" href="#">Check-in</a></li>');
 					});		
 				$("#participants-list").listview('refresh')
 				$("[id^=checkinBtn_]").click(function(event){
@@ -50,45 +46,49 @@ $( function(){
 		});
 
 		function checkinParticipant(pid,psid){
-			removeUndoBtn();
+		  $("#undo-checkin-button").hide();
+		  console.log("removeCheckinBtn called");
 			$().crmAPI ('Participant','update',{'version' :'3', 'event_id' : event_id, 'id' : pid, 'status_id' : '2' }
 			,{
 				ajaxURL: crmajaxURL,
 				success:function (data){
+				  //remove colour from button
 					$('#checkinBtn_'+pid).css("color","");
+					//hide item children
+					$('#row_'+pid).attr('data-participant-id');
 					$('#row_'+pid).children().hide();
-					
-					$('#row_'+pid).append('<a href="#" id="undoBtn_'+pid+'" data-participant-id="'+pid+'" data-prevous-participant-status-id="'+psid+'" class="ui-btn ui-btn-up-c ui-btn-corner-all ui-shadow" data-role="button" data-theme="c">Undo check-in</a>');
-					$("[id^=undoBtn_]").click(function(event){
+					//need to figure out how to change button text before it get displayed.
+          //$("#undo-checkin-button").attr('innerHTML', "Hey!!");
+					$("#undo-checkin-button").show();
+					$("#participants-list").listview('refresh');
+					$("#undo-checkin-button").attr('data-participant-id', pid);
+					$("#undo-checkin-button").attr('data-previous-participant-status-id', psid);
+         
+          //need to figure out how to cancel existing delays
+         $("#undo-checkin-button").delay(10000).fadeOut("normal", function() {
+            // need to remove row so that we don't end up with a weird thick line betwen ajacent rows this is link to above issue with cancelling existing delays
+            // $('#row_'+pid).remove();
+            $("#participants-list").listview('refresh');  
+                                 });
+					$("#undo-checkin-button").click(function(event){
 						undoCheckinParticipant($(this).attr('data-participant-id'),$(this).attr('data-previous-participant-status-id'));
 					});
 				}
 			});
 		}
-		
-		function undoCheckinParticipant(pid,ppsid){
-			$().crmAPI ('Participant','update',{'version' :'3', 'event_id' : event_id, 'id' : pid, 'status_id' : ppsid }
-		          ,{
-		            ajaxURL: crmajaxURL,
-		            success:function (data){
-					//hide undo button
-					$('#undoBtn_'+pid).remove();
-					//show checkin row
-					$('#row_'+pid).children().show();
-					$("#participants-list").listview('refresh');
-					}
-				});
-		}
-		function removeUndoBtn(){
-			console.log("removeCheckinBtn called");
-			$("[id^=undoBtn_]").each(function(index, value) {
-				$(this).delay(1000).slideUp("normal", function() { 
-					$(this).parent().remove(); 
-					$("#participants-list").listview('refresh');
-				});		
-			});
-		}
 
+  function undoCheckinParticipant(pid,ppsid){
+    $().crmAPI ('Participant','update',{'version' :'3', 'event_id' : event_id, 'id' : pid, 'status_id' : ppsid }
+      ,{
+        ajaxURL: crmajaxURL,
+        success:function (data){
+          //show checkin row
+          $('#row_'+pid).children().show();
+          $("#undo-checkin-button").hide();
+          $("#participants-list").listview('refresh');
+        }
+    });
+	}
 });
 
 

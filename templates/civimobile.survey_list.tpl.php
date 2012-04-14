@@ -1,23 +1,17 @@
 <?php require_once('civimobile.header.php'); ?>
 
 <div data-role="page">
-
-	<div data-role="header">
-		<h1>Surveys</h1>
-		<a href="/civimobile" data-ajax="false" data-direction="reverse" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-left jqm-home">Home</a>
-	</div><!-- /header -->
-	
-	<div data-role="content" id="survey-content">
-		<div class="content-primary">
-		
-			<ul data-role="listview" data-theme="c" id="survey-list">
-		    </ul>
-		
-		</div><!-- /content-primary -->
-	</div><!-- /content -->
-
-<?php require_once('civimobile.navbar.php') ?>
-
+  <div data-role="header">
+    <h1>Surveys</h1>
+    <a href="/civimobile" data-ajax="false" data-direction="reverse" data-role="button" data-icon="home" data-iconpos="notext" class="ui-btn-left jqm-home">Home</a>
+  </div><!-- /header -->
+  <div data-role="content" id="survey-content">
+    <div class="content-primary">
+      <ul data-role="listview" data-theme="c" id="survey-list">
+      </ul>
+    </div><!-- /content-primary -->
+  </div><!-- /content -->
+  <?php require_once('civimobile.navbar.php') ?>
 </div><!-- /page -->
 
 <?php require_once('civimobile.footer.php') ?>
