@@ -8,7 +8,7 @@ if(!(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     <?php //print $civimobile_page_settings['head'] ?>
     <?php //print $civimobile_page_settings['favicon'] ?>
     <?php //print $civimobile_page_settings['styles'] ?>
-    <?php //print $civimobile_page_settings['scripts'] ?>
+    <?php //print $civimobile_page_settings['scripts'] ?>    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" >
     <link rel="stylesheet" href="/sites/all/modules/civimobile/libraries/jquery.mobile-1.0.1/jquery.mobile-1.0.1.css" />
     <script src="/sites/all/modules/civimobile/libraries/jquery.mobile-1.0.1/jquery-1.7.1.min.js"></script>
@@ -17,8 +17,9 @@ if(!(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     <script>
          var crmajaxURL = '<?php print base_path(); ?>civicrm/ajax/rest';
          var base_url =  '<?php print base_path(); ?>';
+         var newIndividualProfileId = 1;
+         
     </script>
-    <script src="/sites/all/modules/civimobile/js/base.js"></script>
   </head>
 <body> 
 <?php endif; 
