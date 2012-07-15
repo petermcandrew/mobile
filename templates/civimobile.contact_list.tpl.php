@@ -36,7 +36,8 @@ var jsonProfile = {};
 var fieldIds = {};
 
 $(function(){
-  $.getJSON("http://mobile.local/civicrm/profile/create?gid="+newIndividualProfileId+"&reset=1&json=1",
+  var dataUrl = '<?php echo "{$civimobile_vars['civicrm_base']}/civicrm/profile/create?gid={$new_individual_profile_id}&reset=1&json=1"; ?>';  
+  $.getJSON( dataUrl,
   {
     format: "json"
   },

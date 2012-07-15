@@ -7,8 +7,8 @@ if(!(isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQ
     <title><?php //print $civimobile_page_settings['title'] ?></title>
     <?php //print $civimobile_page_settings['head'] ?>
     <?php //print $civimobile_page_settings['favicon'] ?>
-    <?php //print $civimobile_page_settings['styles'] ?>
-    <?php //print $civimobile_page_settings['scripts'] ?>    
+    <?php $new_individual_profile_id = 1; ?>
+     
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" >
     <link rel="stylesheet" href="/sites/all/modules/civimobile/libraries/jquery.mobile-1.0.1/jquery.mobile-1.0.1.css" />
     <script src="/sites/all/modules/civimobile/libraries/jquery.mobile-1.0.1/jquery-1.7.1.min.js"></script>

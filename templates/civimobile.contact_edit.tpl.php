@@ -42,7 +42,8 @@ function createContactEditfields(){
   //this function gets all of the available contact fields in the profile
   var params = {};
   //get the profile fields
-  $.getJSON("http://mobile.local/civicrm/profile/create?gid="+newIndividualProfileId+"&reset=1&json=1",
+  var dataUrl = '<?php echo "{$civimobile_vars['civicrm_base']}/civicrm/profile/create?gid={$new_individual_profile_id}&reset=1&json=1"; ?>';  
+  $.getJSON( dataUrl,
   {
     format: "json"
   },
